@@ -1,69 +1,11 @@
 import React from 'react'
-
-const Header = ({name}) => {
-  return(
-      <h1>
-          {name}
-      </h1>
-  )
-}
-
-const Content = ({ parts }) => {
-  const eachCourse = parts.map(e =>
-      <Part
-          key={ e.id }
-          part = { e }
-      />
-  );
-
-  return(
-      <ul>
-          { eachCourse }
-      </ul>
-  )
-}
-
-const Part = ({ part }) => {
-  return(
-      <li>
-          { part.name } { part.exercises }
-      </li>
-  )
-}
-
-const Total = ({ parts }) => {
-  const total =  parts.reduce((a, b) => {
-      return { exercises: a.exercises + b.exercises }
-  });
-
-  return(
-      <p>
-          Total of exercises: { total.exercises }
-      </p>
-  )
-}
-
-const Course = ({ course }) => {
-  return (
-      <div>
-          <Header
-              name = { course.name }
-          />
-          <Content
-              parts = { course.parts }
-          />
-          <Total
-              parts = { course.parts }
-          />
-      </div>
-  )
-}
-
+import Course from './Components/Course';
 
 const App = () => {
-    const course = {
-      id: 1,
+  const courses = [
+    {
       name: 'Half Stack application development',
+      id: 1,
       parts: [
         {
           name: 'Fundamentals of React',
@@ -79,11 +21,44 @@ const App = () => {
           name: 'State of a component',
           exercises: 14,
           id: 3
+        },
+        {
+          name: 'Redux',
+          exercises: 11,
+          id: 4
+        }
+      ]
+    }, 
+    {
+      name: 'Node.js',
+      id: 2,
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1
+        },
+        {
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2
         }
       ]
     }
-  
-    return <Course course={course} />
-  }
+  ]
+
+const courseTypes = courses.map(e =>
+    <Course
+        key={ e.id }
+        course={ e }
+    />
+);
+
+return (
+    <div>
+        { courseTypes }
+    </div>
+)
+}
 
 export default App
