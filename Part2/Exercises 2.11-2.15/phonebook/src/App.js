@@ -21,8 +21,6 @@ const App = () => {
       })
   }, [])
 
-  console.log('before loading');
-
   const peopleToShow = showAll === '' 
     ? persons
     : persons.filter(person => person.name.toLowerCase().includes(showAll.toLowerCase()))
